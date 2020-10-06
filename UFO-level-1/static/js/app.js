@@ -5,33 +5,31 @@ var tableData = data;
 var tbody = d3.select("tbody");
 
 // Write function to show UFO sightings 
-function UFOdata(sightings) {
+data.forEach(function(sightings) {
     var tbody = d3.select("tbody");
-    sightings.forEach(UFOInfo => {
-        // Appending one row for each UFO sighting
-        var row = tbody.append("tr");
-        Object.entries(UFOInfo).forEach(function([key, value]) {
-            // Append one cell for each UFO sighting
-            var cell = row.append("td");
-            cell.text(value);
-        });
+    // Appending one row for each UFO sighting
+    var row = tbody.append("tr");
+    Object.entries(sightings).forEach(function([key, value]) {
+        // Append one cell for each UFO sighting
+        var cell = row.append("td");
+        cell.text(value);
     });
-};
+});
 
 // Select the form and button
 var form = d3.select("#form");
+var button = d3.select("filter-btn");
 
-// Select the filter button and write event handler function
-var filterbutton = d3.select("filter-btn");
-filterbutton.on("click", function() {
+// Create the event handlers
+button.on("click", function() {
     // Clear table rows 
     tbody.html("");
 
     // Prevent the page from refreshing on click
     d3.event.preventDefault();
 
-    // Select the input date and get the raw HTML nodes
-    var inputElement = d3.select("#datetime");
+    // Select the correct input element and get the raw HTML nodes
+    var inputElement = d3.select("#.form-control");
 
     // Get the value property 
     var inputValue = inputElement.property("value");
